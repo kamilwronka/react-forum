@@ -38,6 +38,15 @@ app.get("/api/forum/categories", function(req, res) {
     })
 });
 
+app.get("/api/forum/categories/:cat_id", function(req, res) {
+    Threads.getThreadsByCategory(req.params.cat_id, function(err, threads){
+        if(err) {
+            throw err;
+        }
+        res.json(threads);
+    })
+});
+
 app.get("/api/forum/threads", function(req, res) {
     Threads.getThreads(function(err, threads){
         if(err) {
@@ -47,6 +56,14 @@ app.get("/api/forum/threads", function(req, res) {
     })
 });
 
+//app.get("/api/forum/threads/:thread_id", function(req, res) {
+//   Threads.getThreadsById(req.params.thread_id, function( err, //thread){
+ //       if(err) {
+  //          throw err;
+  //      }
+   //     res.json(threads);
+   // })
+//});
 //post events
 
 app.post("/api/forum/categories", function(req, res) {

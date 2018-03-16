@@ -28,8 +28,8 @@ export function createCategory(values, callback) {
     }
 }
 
-export function fetchThreads() {
-    const request = axios.get(`${ROOT_URL}/threads`);
+export function fetchThreads(cat_id) {
+    const request = axios.get(`${ROOT_URL}/categories/${cat_id}`);
 
     return {
         type: FETCH_THREADS,

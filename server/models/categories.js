@@ -5,6 +5,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 // Categories Schema
 var catSchema = mongoose.Schema({
+    cat_id: Number,
     name: {
         type: String,
         required: true
@@ -20,7 +21,7 @@ var catSchema = mongoose.Schema({
 }, { });
 
 var Categories = module.exports = mongoose.model('Categories', catSchema);
-catSchema.plugin(AutoIncrement, { inc_field: 'id' });
+catSchema.plugin(AutoIncrement, { inc_field: 'cat_id' });
 
 // get categories
 

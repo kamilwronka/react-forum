@@ -12,9 +12,9 @@ class ForumIndex extends Component {
 
     renderCategories() {
         return _.map(this.props.categories, category => {
-            const link = `/category/${category.id}`;
+            const link = `/category/${category.cat_id}`;
             return (
-                <li key={category.id} className="list-group-item">
+                <li key={category.cat_id} className="list-group-item">
                     <Link to={link} >
                         {category.name}
                     </Link>

@@ -3,11 +3,11 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 // Threads Schema
 var threadsSchema = mongoose.Schema({
+    thread_id: Number,
     name: {
         type: String,
         required: true
     },
-    _id: Number,
     cat_id: {
         type: Number,
         required: true
@@ -24,10 +24,10 @@ var threadsSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     }
-}, { _id: false });
+}, { });
 
 var Threads = module.exports = mongoose.model('Threads', threadsSchema);
-threadsSchema.plugin(AutoIncrement);
+threadsSchema.plugin(AutoIncrement, { inc_field: 'thread_id' });
 
 // get threads
 
@@ -39,3 +39,6 @@ module.exports.addThread = function(category, callback) {
     Threads.create(category, callback);
 };
 
+module.exports.getThreadsByCategory = function(id, callback) {
+    Threads.find({ "cat_id": id }, callback);
+}

@@ -28,8 +28,8 @@ ReactDOM.render(
                 <Navbar />
                 <Breadcrumbs />
                 <Switch>
-                    <Route path="/category/:id" component={CategoryIndex} />
                     <Route path="/category/create" component={CreateCategory} />
+                    <Route path="/category/:cat_id" component={CategoryIndex} />
                     <Route path="/" component={ForumIndex} />
                 </Switch>
             </div>

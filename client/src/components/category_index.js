@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
+import { fetchThreads } from "../actions";
 
 class CategoryIndex extends Component {
+
+    componentDidMount() {
+        const { cat_id } = this.props.match.params;
+        this.props.fetchThreads(cat_id);
+    }
+
     renderTopics() {
-        const { id } = this.props.match.params;
-        return this.props.topics.map((topic) => {
-            if(topic.cat_id === Number(id)) {
-                return (
-                    <li key={topic.id} className="list-group-item">
-                        {topic.title}
-                    </li>
-                );
-            }
+        return _.map(this.props.threads, thread => {
+            return (
+                <li key={thread._id} className="list-group-item">
+                        {thread.name}
+                </li>
+            );
         })
     }
     render() {
@@ -27,8 +32,8 @@ class CategoryIndex extends Component {
 
 function mapStateToProps(state) {
     return {
-        topics: state.topics
+        threads: state.threads
     }
 }
 
-export default connect(mapStateToProps)(CategoryIndex);
+export default connect(mapStateToProps, { fetchThreads })(CategoryIndex);
