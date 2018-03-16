@@ -23,9 +23,13 @@ class CategoryIndex extends Component {
     }
     render() {
         return (
-            <ul className="list-group">
+            <div className="mx-2">
+                <Link to="/thread/create" className="btn btn-success my-2">Create new thread</Link>
+                <h3>List of threads in (category name)</h3>
+                <ul className="list-group">
                 {this.renderTopics()}
-            </ul>
+                </ul>
+            </div>
         );
     }
 }
