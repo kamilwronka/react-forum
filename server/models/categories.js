@@ -29,6 +29,11 @@ module.exports.getCategories = function(callback, limit) {
     Categories.find(callback).limit(limit);
 };
 
+module.exports.getCategoryById = function(id, callback) {
+    Categories.find({ "cat_id": id }, callback);
+    console.log(id, callback);
+};
+
 //add category
 module.exports.addCategory = function(category, callback) {
     Categories.create(category, callback);

@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createCategory } from "../actions";
+import { createThread } from "../actions";
+const data = {
+    cat_id: 5
+};
 
-class NewCategory extends Component {
+
+class NewThread extends Component {
     renderField(field) {
         const { meta } = field;
         const className = `form-group ${ meta.touched && meta.error ? 'has-danger' : ''} px-2`;
@@ -14,9 +18,9 @@ class NewCategory extends Component {
                 <label>{field.label}</label>
                 <input
                     className="form-control"
-                    type="text"
+                    type={field.type}
                     {...field.input}
-                    />
+                />
                 <div className="text-danger">
                     {meta.touched ? meta.error : ''}
                 </div>
@@ -25,24 +29,38 @@ class NewCategory extends Component {
     }
 
     onSubmit(values) {
-        this.props.createCategory(values, () => {
+        this.props.createThread(values, () => {
             this.props.history.push('/');
-        })
+        });
     }
 
     render() {
         const { handleSubmit } = this.props;
-
+        console.log(this.props.initialValues);
         return (
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field
-                    label="Category name"
+                    label="Thread title"
                     name="name"
+                    type="text"
                     component={this.renderField}
                 />
                 <Field
-                    label="Category description"
+                    label="Thread description"
                     name="description"
+                    type="text"
+                    component={this.renderField}
+                />
+                <Field
+                    label="Thread author"
+                    name="author"
+                    type="text"
+                    component={this.renderField}
+                />
+                <Field
+                    label="Category"
+                    name="cat_id"
+                    type="text"
                     component={this.renderField}
                 />
                 <button type="submit" className="btn btn-primary mx-2">
@@ -58,17 +76,33 @@ function validate(values) {
     const errors = {};
 
     //validate inputs from values
-    if(!values.category) {
-        errors.category = "Enter category name";
+    if(!values.name) {
+        errors.name = "Enter category name";
     }
     if(!values.description) {
         errors.description = "Enter description pliz";
     }
+    if(!values.author) {
+        errors.author = "Enter description pliz";
+    }
+    if(!values.cat_id) {
+        errors.cat_id = "Enter description pliz";
+    }
     return errors;
 }
+
+function mapStateToProps(state, ownProps) {
+    console.log(data);
+    return {
+        initialValues: data
+    }
+}
+
+
 export default reduxForm({
     validate,
-    form: 'NewCategoryForm'
+    enableReinitialize: true,
+    form: 'NewThreadForm'
 })(
-    connect(null, { createCategory })(NewCategory)
+    connect(mapStateToProps, { createThread })(NewThread)
 );

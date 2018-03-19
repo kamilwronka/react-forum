@@ -14,6 +14,8 @@ import CategoryIndex from './components/category_index';
 import Navbar from './components/navbar';
 import Breadcrumbs from './components/breadcrumbs';
 import CreateCategory from './components/create_category';
+import CreateThread from './components/create_thread';
+import ShowThread from './components/show_thread';
 
 //reducers
 import reducers from './reducers';
@@ -28,6 +30,8 @@ ReactDOM.render(
                 <Navbar />
                 <Breadcrumbs />
                 <Switch>
+                    <Route path="/category/:cat_id/thread/create" component={CreateThread} />
+                    <Route path="/category/thread/:thread_id" component={ShowThread} />
                     <Route path="/category/create" component={CreateCategory} />
                     <Route path="/category/:cat_id" component={CategoryIndex} />
                     <Route path="/" component={ForumIndex} />

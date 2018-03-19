@@ -47,6 +47,16 @@ app.get("/api/forum/categories/:cat_id", function(req, res) {
     })
 });
 
+app.get("/api/forum/category/:cat_id", function(req, res) {
+    Categories.getCategoryById(req.params.cat_id, function(err, category){
+        if(err) {
+            throw err;
+        }
+        res.json(category);
+        console.log(category);
+    })
+});
+
 app.get("/api/forum/threads", function(req, res) {
     Threads.getThreads(function(err, threads){
         if(err) {

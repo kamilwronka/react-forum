@@ -41,4 +41,4 @@ module.exports.addThread = function(category, callback) {
 
 module.exports.getThreadsByCategory = function(id, callback) {
     Threads.find({ "cat_id": id }, callback);
-}
+};
